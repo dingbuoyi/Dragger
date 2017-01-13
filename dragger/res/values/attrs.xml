@@ -7,6 +7,7 @@
     <attr name="tension" format="reference|integer"/>
     <attr name="friction" format="reference|integer"/>
     <attr name="drag_limit" format="float"/>
+    <attr name="run_animation_on_finish_inflate" format="boolean"/>
 
     <attr name="drag_position" format="enum">
       <enum name="left" value="0"/>

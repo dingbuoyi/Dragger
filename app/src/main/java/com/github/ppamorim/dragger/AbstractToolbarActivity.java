@@ -59,7 +59,7 @@ public abstract class AbstractToolbarActivity extends AbstractActivity {
   }
 
   public void setToolbarTitle() {
-    toolbar.setTitle(getToolbarTitle());
+//    toolbar.setTitle(getToolbarTitle());
   }
 
   protected abstract String getToolbarTitle();

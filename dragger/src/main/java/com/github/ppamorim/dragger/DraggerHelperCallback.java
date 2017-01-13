@@ -24,7 +24,7 @@ import android.view.View;
  * @author Pedro Paulo de Amorim
  *
  */
-public class DraggerHelperCallback extends ViewDragHelper.Callback {
+public class DraggerHelperCallback extends android.support.v4.widget.ViewDragHelper.Callback {
 
   private int dragState = 0;
   private int dragOffset = 0;

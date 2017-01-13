@@ -18,49 +18,71 @@ package com.github.ppamorim.dragger;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import butterknife.InjectView;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+
 import com.github.ppamorim.dragger.app.R;
+
+import butterknife.InjectView;
+import uk.co.senab.photoview.PhotoViewAttacher;
 
 public class ImageActivity extends AbstractActivity {
 
-  private static final String CAN_ANIMATE = "can_animate";
-  public static final String DRAG_POSITION = "drag_position";
+    private static final String CAN_ANIMATE = "can_animate";
+    public static final String DRAG_POSITION = "drag_position";
 
-  @InjectView(R.id.toolbar) Toolbar toolbar;
-  @InjectView(R.id.dragger_view) DraggerView draggerView;
+    @InjectView(R.id.toolbar)
+    Toolbar toolbar;
+    @InjectView(R.id.dragger_view)
+    DraggerView draggerView;
+    @InjectView(R.id.shadow_view)
+    FrameLayout shadowView;
+    @InjectView(R.id.iv)
+    ImageView iv;
+    @InjectView(R.id.drag_view)
+    LinearLayout dragView;
 
-  @Override protected int getContentViewId() {
-    return R.layout.activity_dragger;
-  }
+    PhotoViewAttacher mAttacher;
 
-  @Override protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    configToolbar();
-    configIntents();
-  }
-
-  @Override public boolean onOptionsItemSelected(MenuItem item) {
-    switch (item.getItemId()) {
-      case android.R.id.home:
-        onBackPressed();
-        return true;
-      default:
-        return super.onOptionsItemSelected(item);
+    @Override
+    protected int getContentViewId() {
+        return R.layout.activity_dragger;
     }
-  }
 
-  @Override public void onBackPressed() {
-    draggerView.closeActivity();
-  }
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        configToolbar();
+        configIntents();
+        draggerView.setDraggerLimit(0.7f);
+        mAttacher = new PhotoViewAttacher(iv);
+    }
 
-  private void configToolbar() {
-    setSupportActionBar(toolbar);
-    toolbar.setTitle(getResources().getString(R.string.app_name));
-    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-  }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
-  private void configIntents() {
-    draggerView.setDraggerPosition((DraggerPosition) getIntent().getSerializableExtra(DRAG_POSITION));
-  }
+    @Override
+    public void onBackPressed() {
+        draggerView.closeActivity();
+    }
+
+    private void configToolbar() {
+        setSupportActionBar(toolbar);
+        toolbar.setTitle(getResources().getString(R.string.app_name));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    private void configIntents() {
+        draggerView.setDraggerPosition((DraggerPosition) getIntent().getSerializableExtra(DRAG_POSITION));
+    }
 
 }
